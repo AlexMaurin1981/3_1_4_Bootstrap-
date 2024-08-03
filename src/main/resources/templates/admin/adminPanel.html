@@ -11,7 +11,7 @@
         <th>ID</th>
         <th>FIRSTNAME</th>
         <th>LASTNAME</th>
-        <th>UserName</th>
+
         <th>Password</th>
         <th>EMAIL</th>
         <th>ROLE</th>
@@ -23,7 +23,6 @@
         <td th:text="${users.id}"/>
         <td th:text="${users.firstName}"/>
         <td th:text="${users.lastName}"/>
-        <td th:text="${users.username}"/>
         <td th:text="${users.password}"/>
         <td th:text="${users.email}"/>
     <td th:each= "role :${users.getRoles()}" th:text="${role.toString()}"></td>

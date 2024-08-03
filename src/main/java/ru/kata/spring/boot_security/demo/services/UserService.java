@@ -6,7 +6,7 @@ import ru.kata.spring.boot_security.demo.enteties.User;
 import java.util.List;
 
 public interface UserService  extends UserDetailsService {
-    User getUserByUserName(String userName);
+    User getUserByEmail(String email);
 
     void saveUser(User user);
 
