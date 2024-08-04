@@ -2,34 +2,54 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Update User</title>
+    <title>Edit User</title>
 
 </head>
 <body>
-<h1>Update User</h1>
+<h1>Edit user</h1>
 <form th:method="POST" th:action="@{/admin/update(id=${user.getId()})}" th:object="${user}">
     <div>
-        <label for="name">FirstName:</label>
+        <label for="id">ID</label>
+        <br>
+        <input type="text" id="id" th:field="*{id}" required>
+    </div>
+
+    <div>
+        <label for="name">First name</label>
+        <br>
         <input type="text" id="name" th:field="*{firstName}" required>
     </div>
     <div>
-        <label for="surname">LastName:</label>
+        <label for="surname">Last name</label>
+        <br>
         <input type="text" id="surname" th:field="*{lastName}" required>
     </div>
     <div>
-        <label for="email">Email:</label>
+        <label for="email">Email</label>
+        <br>
         <input type="email" id="email" th:field="*{email}" required>
     </div>
     <div>
-      <label for="password">PASSWORD:</label>
-        <input type="text" id="password" th:field="*{password}" required>
+      <label for="password">Password</label>
+        <br>
+        <input th:="text" id="password" th:field="*{password}" required>
     </div>
     <div>
-        <label for="role">ROLE:</label>
-        <input type="text" id="role" th:field="*{roles}" required>
-    </div>
+        <label for="role">Role:</label>
+        <br>
+        <select id="role" th:field="*{roles}" multiple>
+            < <option th:each="role : ${roles}"
+                      th:value="${role.getId()}"
+                      th:text="${role.toString()}"></option>
 
-    <button type="submit">Update</button>
+
+        </select>
+    </div>
+    <form th:method="POST" th:action="@{/logout}">
+        <input type="submit" value="Close"/>
+
+    <button type="submit">Edit</button>
+</form>
 </form>
 </body>
 </html>

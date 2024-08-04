@@ -4,12 +4,14 @@ package ru.kata.spring.boot_security.demo.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ru.kata.spring.boot_security.demo.enteties.User;
 import ru.kata.spring.boot_security.demo.services.RoleService;
 import ru.kata.spring.boot_security.demo.services.UserService;
 
 import java.security.Principal;
+import java.util.List;
 
 
 @Controller
@@ -29,18 +31,23 @@ public class AdminController {
     public String showAllUsers(Model model, Principal principal) {
         model.addAttribute("helloUser", principal.getName());
         model.addAttribute("allUsers", userService.getAllUsers());
-        model.addAttribute("role",roleService.listRoles());
+        model.addAttribute("role",roleService.getRoles());
         return "admin/adminPanel";
     }
 
     @GetMapping("/addNewUser")
-    public String addNewUser(Model model) {
+    public String addNewUser(Model model, Principal principal) {
+        model.addAttribute("helloUser", principal.getName());
         model.addAttribute("user", new User());
+        model.addAttribute("roles",roleService.getRoles());
         return "admin/adduser";
     }
 
     @PostMapping("/saveUser")
-    public String saveUser(@ModelAttribute("user") User user) {
+    public String saveUser(@ModelAttribute("user") User user, BindingResult bindingResult) {
+if (bindingResult.hasErrors()){
+    return "admin/adduser";
+}
         userService.saveUser(user);
         return "redirect:/admin";
     }
@@ -54,11 +61,12 @@ public class AdminController {
     @GetMapping ("/updateUser")
     public String  update(@RequestParam ("id") long id,Model model) {
         model.addAttribute("user", userService.getUserById(id));
+        model.addAttribute("roles", roleService.getRoles());
         return "admin/updateuser";
     }
 
         @PostMapping("/update")
-        public String save (@ModelAttribute("user") User user){
+        public String save (@ModelAttribute("user") User user, List<String> roleArray) {
             userService.updateUser(user);
             return "redirect:/admin";
         }

@@ -11,22 +11,26 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.kata.spring.boot_security.demo.enteties.Role;
 import ru.kata.spring.boot_security.demo.enteties.User;
+import ru.kata.spring.boot_security.demo.reposotories.RoleRepository;
 import ru.kata.spring.boot_security.demo.reposotories.UserRepository;
 
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl implements UserService {
 
+
+    private final RoleService roleService;
+    private final RoleRepository roleRepository;
     private final UserRepository userRepository;
 
-
-
     @Autowired
-    public UserServiceImpl(UserRepository userRepository) {
-        this.userRepository = userRepository;
-
+    public UserServiceImpl(UserRepository userRepository, RoleService roleService, RoleRepository roleRepository, UserRepository userRepository1) {
+        this.roleService = roleService;
+        this.roleRepository = roleRepository;
+        this.userRepository = userRepository1;
     }
 
     @Override
@@ -37,7 +41,6 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public void saveUser(User user) {
-        user.setRoles(Collections.singleton(new Role(1L, "ROLE_USER")));
         user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
         userRepository.save(user);
     }
@@ -56,7 +59,7 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public void updateUser(User updateUser) {
-        User user = userRepository.findById(updateUser.getId()).orElseThrow(() -> new IllegalArgumentException("User not found"));
+        User user = userRepository.findById(updateUser.getId()).orElse(new User());
         String currentPassword = user.getPassword();
         String newPassword = updateUser.getPassword();
         if (!currentPassword.equals(newPassword)) {
@@ -78,3 +81,4 @@ public class UserServiceImpl implements UserService {
         return user;
     }
 }
+

@@ -4,7 +4,9 @@ import org.springframework.stereotype.Service;
 import ru.kata.spring.boot_security.demo.enteties.Role;
 import ru.kata.spring.boot_security.demo.reposotories.RoleRepository;
 
-import java.util.Collection;
+import java.util.ArrayList;
+import java.util.List;
+
 
 
 @Service
@@ -16,9 +18,11 @@ public class RoleServiceImpl implements RoleService {
         this.roleRepository = roleRepository;
     }
 
+
     @Override
-    public Collection<Role> listRoles() {
+    public List<Role> getRoles() {
         return roleRepository.findAll();
     }
+
 
 }

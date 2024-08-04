@@ -2,20 +2,24 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>ALL USERS</title>
+    <title>ALL users</title>
 </head>
 <body>
 
 <div>
     <h3> <span th:text = "${helloUser}"></span> with roles<span th:text="${role}"> </span> </h3>
 </div>
+<br>
+<h2> Admin panel</h2>
 
 <table class="table table-striped">
+    <h3> All users</h3>
+
     <tr>
         <th>ID</th>
         <th>First Name</th>
         <th>Last Name</th>
-        <th>Age</th>
+
         <th>Email</th>
         <th>Role</th>
         <th>Edit</th>
@@ -27,35 +31,26 @@
         <td th:text="${users.id}"/>
         <td th:text="${users.firstName}"/>
         <td th:text="${users.lastName}"/>
-        <td th:text="${users.password}"/>
         <td th:text="${users.email}"/>
-    <td th:each= "role :${users.getRoles()}" th:text="${role.toString()}"></td>
+        <td th:each= "role :${users.getRoles()}" th:text="${role.toString()}"></td>
 
 
         <td>
-            <a th:href="@{admin/updateUser/(id=${users.getId()})}">Update</a>
+            <a th:href="@{admin/updateUser/(id=${users.getId()})}">Edit</a>
         </td>
         <td>
-    <form th:method="POST" th:action="@{/admin/deleteUser(id=${users.getId()})}">
-        <input type="submit" value="Delete"/>
-        </form>
+            <form th:method="POST" th:action="@{/admin/deleteUser(id=${users.getId()})}">
+                <input type="submit" value="Delete"/>
+            </form>
         </td>
     </tr>
 </table>
 <br>
 
-    <form th:method="GET" th:action="@{/admin/addNewUser}">
-        <input type="submit" value="Add User"/>
-         </form>
-
-<br>
-<br>
-    <br>
-    <br>
-
-<form th:method="POST" th:action="@{/logout}">
-    <input type="submit" value="Logout"/>
+<form th:method="GET" th:action="@{/admin/addNewUser}">
+    <input type="submit" value="Add User"/>
 </form>
+
 
 </body>
 </html>
