@@ -16,21 +16,19 @@ import ru.kata.spring.boot_security.demo.reposotories.UserRepository;
 
 
 import java.util.*;
-import java.util.stream.Collectors;
+
 
 @Service
 public class UserServiceImpl implements UserService {
 
 
-    private final RoleService roleService;
-    private final RoleRepository roleRepository;
+
     private final UserRepository userRepository;
 
     @Autowired
-    public UserServiceImpl(UserRepository userRepository, RoleService roleService, RoleRepository roleRepository, UserRepository userRepository1) {
-        this.roleService = roleService;
-        this.roleRepository = roleRepository;
-        this.userRepository = userRepository1;
+    public UserServiceImpl(UserRepository userRepository) {
+
+        this.userRepository = userRepository;
     }
 
     @Override
