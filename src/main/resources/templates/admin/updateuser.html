@@ -11,7 +11,7 @@
     <div>
         <label for="id">ID</label>
         <br>
-        <input type="text" id="id" th:field="*{id}" required>
+        <input type="text" id="id" th:field="*{id}"  th: readonly required>
     </div>
 
     <div>
@@ -32,7 +32,7 @@
     <div>
       <label for="password">Password</label>
         <br>
-        <input th:="text" id="password" th:field="*{password}" required>
+        <input th:="password" id="password" th:field="*{password}" required>
     </div>
     <div>
         <label for="role">Role:</label>

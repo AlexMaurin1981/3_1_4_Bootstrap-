@@ -20,28 +20,28 @@
     <div>
         <label for="name">First Name:</label>
         <br>
-        <input type="text" id="name" th:field="*{firstName}" required>
+        <input type="text" id="name" th:field="*{firstName}" placeholder="First Name" required>
     </div>
     <div>
         <label for="surname">Last Name:</label>
         <br>
-        <input type="text" id="surname" th:field="*{lastName}" required>
+        <input type="text" id="surname" th:field="*{lastName}"  placeholder="Last Name" required>
     </div>
     <div>
         <label for="email">Email:</label>
         <br>
-        <input type="email" id="email" th:field="*{email}" required>
+        <input type="email" id="email" th:field="*{email}" placeholder="Email:" required>
     </div>
     <div>
         <label for="password">Password:</label>
         <br>
-        <input type="password" id="password" th:field="*{password}" required>
+        <input type="password" id="password" th:field="*{password}" placeholder="Password:" required>
     </div>
     <div>
         <label for="role">Role:</label>
         <br>
         <select id="role" th:field="*{roles}" multiple>
-            < <option th:each="role : ${roles}"
+             <option th:each="role : ${roles}"
                       th:value="${role.getId()}"
                       th:text="${role.toString()}"></option>
 
