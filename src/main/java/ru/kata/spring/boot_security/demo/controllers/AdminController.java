@@ -11,7 +11,6 @@ import ru.kata.spring.boot_security.demo.services.RoleService;
 import ru.kata.spring.boot_security.demo.services.UserService;
 
 import java.security.Principal;
-import java.util.List;
 
 
 @Controller
@@ -66,7 +65,7 @@ if (bindingResult.hasErrors()){
     }
 
         @PostMapping("/update")
-        public String save (@ModelAttribute("user") User user, List<String> roleArray) {
+        public String save (@ModelAttribute("user") User user) {
             userService.updateUser(user);
             return "redirect:/admin";
         }

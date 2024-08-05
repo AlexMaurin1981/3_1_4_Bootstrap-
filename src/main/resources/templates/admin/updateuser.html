@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:type="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Edit User</title>
@@ -11,7 +11,7 @@
     <div>
         <label for="id">ID</label>
         <br>
-        <input type="text" id="id" th:field="*{id}"  th: readonly required>
+        <input type="text" id="id" th:field="*{id}" readonly required>
     </div>
 
     <div>
@@ -32,10 +32,10 @@
     <div>
       <label for="password">Password</label>
         <br>
-        <input th:="password" id="password" th:field="*{password}" required>
+        <input type="password" id="password" th:field="*{password}" required>
     </div>
     <div>
-        <label for="role">Role:</label>
+        <label for="role">Role</label>
         <br>
         <select id="role" th:field="*{roles}" multiple>
             < <option th:each="role : ${roles}"

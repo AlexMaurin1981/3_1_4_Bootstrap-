@@ -9,7 +9,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import org.springframework.transaction.annotation.Transactional;
-import ru.kata.spring.boot_security.demo.enteties.Role;
+
 import ru.kata.spring.boot_security.demo.enteties.User;
 import ru.kata.spring.boot_security.demo.reposotories.RoleRepository;
 import ru.kata.spring.boot_security.demo.reposotories.UserRepository;
@@ -59,12 +59,13 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public void updateUser(User updateUser) {
-        User user = userRepository.findById(updateUser.getId()).orElse(new User());
-        String currentPassword = user.getPassword();
-        String newPassword = updateUser.getPassword();
-        if (!currentPassword.equals(newPassword)) {
-            updateUser.setPassword((new BCryptPasswordEncoder().encode(updateUser.getPassword())));
+        if (!updateUser.getPassword().isBlank()) {
+            updateUser.setPassword(new BCryptPasswordEncoder().encode(updateUser.getPassword()));
+        } else {
+            updateUser.setPassword(userRepository.findById(updateUser.getId()).orElse(new User()).getPassword());
         }
+
+
         userRepository.save(updateUser);
     }
 
