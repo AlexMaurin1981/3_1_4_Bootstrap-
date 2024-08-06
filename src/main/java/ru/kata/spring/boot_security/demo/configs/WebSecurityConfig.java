@@ -18,11 +18,13 @@ import javax.security.sasl.AuthenticationException;
     public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         private final SuccessUserHandler successUserHandler;
+        private final BCryptPasswordEncoder bCryptPasswordEncoder;
         private final UserService userService;
 
         @Autowired
-        public WebSecurityConfig(SuccessUserHandler successUserHandler, UserService userService) {
+        public WebSecurityConfig(SuccessUserHandler successUserHandler, BCryptPasswordEncoder bCryptPasswordEncoder, UserService userService) {
             this.successUserHandler = successUserHandler;
+            this.bCryptPasswordEncoder = bCryptPasswordEncoder;
 
 
             this.userService = userService;
@@ -33,7 +35,7 @@ import javax.security.sasl.AuthenticationException;
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/", "/index","/login").permitAll()
+                .antMatchers("/","/login").permitAll()
                 .antMatchers("admin/**").hasRole("ADMIN")
                 .antMatchers("/user/**").hasAnyRole("USER","ADMIN")
                 .anyRequest().authenticated()
@@ -55,18 +57,13 @@ import javax.security.sasl.AuthenticationException;
         }
 
         @Bean
-       public BCryptPasswordEncoder bCryptPasswordEncoder() {
-            return new BCryptPasswordEncoder();
-        }
-
-
-        @Bean
     DaoAuthenticationProvider daoAuthenticationProvider (){
         DaoAuthenticationProvider daoAuthentication = new DaoAuthenticationProvider();
-        daoAuthentication.setPasswordEncoder(bCryptPasswordEncoder());
+        daoAuthentication.setPasswordEncoder(bCryptPasswordEncoder);
         daoAuthentication.setUserDetailsService(userService);
         return daoAuthentication;
     }
+
 }
 
 

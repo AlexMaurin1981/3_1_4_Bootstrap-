@@ -20,12 +20,12 @@ import java.util.*;
 @Service
 public class UserServiceImpl implements UserService {
 
-
-
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
     private final UserRepository userRepository;
 
     @Autowired
-    public UserServiceImpl(UserRepository userRepository) {
+    public UserServiceImpl(BCryptPasswordEncoder bCryptPasswordEncoder, UserRepository userRepository) {
+        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
 
         this.userRepository = userRepository;
     }
@@ -38,7 +38,7 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public void saveUser(User user) {
-        user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
+        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         userRepository.save(user);
     }
 
@@ -56,13 +56,12 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public void updateUser(User updateUser) {
-        if (!updateUser.getPassword().isBlank()) {
-            updateUser.setPassword(new BCryptPasswordEncoder().encode(updateUser.getPassword()));
-        } else {
-            updateUser.setPassword(userRepository.findById(updateUser.getId()).orElse(new User()).getPassword());
+        User user = userRepository.findById(updateUser.getId()).orElseThrow(()-> new IllegalArgumentException("User not found")) ;
+        String correntPassword = user.getPassword();
+        String newPassword = updateUser.getPassword();
+        if (!correntPassword.equals(newPassword)) {
+            updateUser.setPassword(bCryptPasswordEncoder.encode(updateUser.getPassword()));
         }
-
-
         userRepository.save(updateUser);
     }
 
