@@ -25,6 +25,11 @@
         <input type="text" id="surname" th:field="*{lastName}" required>
     </div>
     <div>
+        <label for="age">Age</label>
+        <br>
+        <input type="number" id="age" th:field="*{age}" required>
+    </div>
+    <div>
         <label for="email">Email</label>
         <br>
         <input type="email" id="email" th:field="*{email}" required>
@@ -32,13 +37,13 @@
     <div>
       <label for="password">Password</label>
         <br>
-        <input type="password" id="password" th:field="*{password}" required>
+        <input type="password" id="password" th:field="*{password}">
     </div>
     <div>
         <label for="role">Role</label>
         <br>
         <select id="role" th:field="*{roles}" multiple>
-            < <option th:each="role : ${roles}"
+             <option th:each="role : ${roles}"
                       th:value="${role.getId()}"
                       th:text="${role.toString()}"></option>
 
@@ -49,6 +54,7 @@
         <input type="submit" value="Close"/>
 
     <button type="submit">Edit</button>
+</form>
 </form>
 </body>
 </html>

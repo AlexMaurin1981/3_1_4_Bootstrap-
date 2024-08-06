@@ -26,7 +26,8 @@ public class User implements UserDetails {
    private String password;
    @Column(name = "first_name")
    private String firstName;
-
+   @Column (name = "age")
+   private String age;
    @Column(name = "last_name")
    private String lastName;
 
@@ -120,6 +121,13 @@ public class User implements UserDetails {
    }
 
 
+   public String getAge() {
+      return age;
+   }
+
+   public void setAge(String age) {
+      this.age = age;
+   }
 }
 
 

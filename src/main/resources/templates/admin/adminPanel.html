@@ -14,23 +14,24 @@
 
 <table class="table table-striped">
     <h3> All users</h3>
-
+    <thead>
     <tr>
         <th>ID</th>
         <th>First Name</th>
         <th>Last Name</th>
-
+        <th>Age</th>
         <th>Email</th>
         <th>Role</th>
         <th>Edit</th>
         <th>Delete</th>
 
     </tr>
-
+</thead>
     <tr th:each="users : ${allUsers}">
         <td th:text="${users.id}"/>
         <td th:text="${users.firstName}"/>
         <td th:text="${users.lastName}"/>
+        <td th:text="${users.age}"/>
         <td th:text="${users.email}"/>
         <td th:each= "role :${users.getRoles()}" th:text="${role.toString()}"></td>
 
