@@ -35,12 +35,15 @@
         <td th:text="${users.email}"/>
         <td th:each= "role :${users.getRoles()}" th:text="${role.toString()}"></td>
 
+        <td>
+            <form th:method="GET" th:action="@{admin/updateUser/{id}(id=${users.getId()})}">
+                <input type="submit" value="Edit"/>
+                </form>
+        </td>
+
 
         <td>
-            <a th:href="@{admin/updateUser/(id=${users.getId()})}">Edit</a>
-        </td>
-        <td>
-            <form th:method="POST" th:action="@{/admin/deleteUser(id=${users.getId()})}">
+            <form th:method="GET" th:action="@{/admin/deleteUser/{id}(id=${users.getId()})}">
                 <input type="submit" value="Delete"/>
             </form>
         </td>

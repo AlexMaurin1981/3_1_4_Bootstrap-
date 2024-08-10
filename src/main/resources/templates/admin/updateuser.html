@@ -7,7 +7,7 @@
 </head>
 <body>
 <h1>Edit user</h1>
-<form th:method="POST" th:action="@{/admin/update(id=${user.getId()})}" th:object="${user}">
+<form th:method="POST" th:action="@{/admin/update/{id}(id=${user.getId()})}" th:object="${user}">
     <div>
         <label for="id">ID</label>
         <br>
@@ -52,7 +52,6 @@
     </div>
     <form th:method="POST" th:action="@{/logout}">
         <input type="submit" value="Close"/>
-
     <button type="submit">Edit</button>
 </form>
 </form>

@@ -51,20 +51,27 @@ if (bindingResult.hasErrors()){
         return "redirect:/admin";
     }
 
-    @PostMapping("/deleteUser")
-    public String deleteUser (@RequestParam("id") long id){
+    @GetMapping("/deleteUser/{id}")
+    public String delete (@PathVariable("id") long id,Model model) {
+        model.addAttribute("user", userService.getUserById(id));
+        model.addAttribute("roles", roleService.getRoles());
+
+        return "/admin/deleteuser";
+    }
+    @PostMapping("/delete/{id}")
+    public String deleteUser (@ModelAttribute("user") User user, @PathVariable("id") long id) {
        userService.deleteUserById(id);
         return "redirect:/admin";
     }
 
-    @GetMapping ("/updateUser")
-    public String  update(@RequestParam ("id") long id,Model model) {
+    @GetMapping ("/updateUser/{id}")
+    public String  update(@PathVariable ("id") long id,Model model) {
         model.addAttribute("user", userService.getUserById(id));
         model.addAttribute("roles", roleService.getRoles());
         return "admin/updateuser";
     }
 
-        @PostMapping("/update")
+        @PostMapping("/update/{id}")
         public String save (@ModelAttribute("user") User user) {
             userService.updateUser(user);
             return "redirect:/admin";
