@@ -58,7 +58,7 @@ if (bindingResult.hasErrors()){
 
         return "/admin/deleteuser";
     }
-    @PostMapping("/delete/{id}")
+    @DeleteMapping("/delete/{id}")
     public String deleteUser (@ModelAttribute("user") User user, @PathVariable("id") long id) {
        userService.deleteUserById(id);
         return "redirect:/admin";
@@ -71,7 +71,7 @@ if (bindingResult.hasErrors()){
         return "admin/updateuser";
     }
 
-        @PostMapping("/update/{id}")
+        @PatchMapping("/update/{id}")
         public String save (@ModelAttribute("user") User user) {
             userService.updateUser(user);
             return "redirect:/admin";
