@@ -7,7 +7,7 @@
 <body>
 
 <div>
-    <h3> <span th:text = "${helloUser}"></span> with roles<span th:text="${role}"> </span> </h3>
+    <h3> <span th:text = "${helloUser}"></span> with roles<span th:each="role: ${role}" th:text="${role.toString()}"> </span> </h3>
 </div>
 <br>
 <h2> Admin panel</h2>
@@ -55,6 +55,8 @@
     <input type="submit" value="Add User"/>
 </form>
 
-
+    <form th:method="POST" th:action="@{/logout}">
+        <input type="submit" value="Close"/>
+</form></form>
 </body>
 </html>

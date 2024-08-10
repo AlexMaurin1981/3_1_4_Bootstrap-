@@ -45,8 +45,6 @@
             <option th:each="role : ${roles}"
                     th:value="${role.getId()}"
                     th:text="${role.toString()}"></option>
-
-
         </select>
     </div>
     <form th:method="DELETE" th:action="@{/logout}">
