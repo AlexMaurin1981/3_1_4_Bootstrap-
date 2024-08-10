@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Delete</title>
+</head>
+<body>
+<h1>Delete user</h1>
+<form th:method="POST" th:action="@{/admin/delete/{id}(id=${user.getId()})}" th:object="${user}">
+    <div>
+        <label for="id">ID</label>
+        <br>
+        <input type="text" id="id" th:field="*{id}" readonly>
+    </div>
+
+    <div>
+        <label for="name">First name</label>
+        <br>
+        <input type="text" id="name" th:field="*{firstName}" readonly>
+    </div>
+    <div>
+        <label for="surname">Last name</label>
+        <br>
+        <input type="text" id="surname" th:field="*{lastName}" readonly>
+    </div>
+    <div>
+        <label for="age">Age</label>
+        <br>
+        <input type="number" id="age" th:field="*{age}" readonly>
+    </div>
+    <div>
+        <label for="email">Email</label>
+        <br>
+        <input type="email" id="email" th:field="*{email}" readonly>
+    </div>
+    <div>
+        <label for="password">Password</label>
+        <br>
+        <input type="password" id="password" th:field="*{password}" readonly>
+    </div>
+    <div>
+        <label for="role">Role</label>
+        <br>
+        <select id="role" th:field="*{roles}" multiple>
+            <option th:each="role : ${roles}"
+                    th:value="${role.getId()}"
+                    th:text="${role.toString()}"></option>
+
+
+        </select>
+    </div>
+    <form th:method="DELETE" th:action="@{/logout}">
+        <input type="submit" value="Close"/>
+
+        <button type="submit">Delete</button>
+    </form>
+</form>
+</body>
+</html>
