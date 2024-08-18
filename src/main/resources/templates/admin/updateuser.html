@@ -20,51 +20,52 @@
                             data-bs-dismiss="modal">
                     </button>
                 </div>
-                <div class="modal-body">
-                    <form th:method="PATCH" th:action="@{/admin/update/{id}(id=${user.getId()})}" th:object="${user}">
-                                <div class="form-group">
-                                    <label for="id">ID</label>
-                                    <br>
-                                    <input type="text" class="form-control" id="id" th:field="*{id}" readonly required>
-                                </div>
+                <div class="modal-body fw-bold">
 
-                                <div class="form-group">
-                                    <label for="name">First name</label>
-                                    <br>
-                                    <input type="text" class="form-control" id="name" th:field="*{firstName}" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="surname">Last name</label>
-                                    <br>
-                                    <input type="text" class="form-control" id="surname" th:field="*{lastName}" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="age">Age</label>
-                                    <br>
-                                    <input type="number" class="form-control" id="age" th:field="*{age}" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="email">Email</label>
-                                    <br>
-                                    <input type="email" class="form-control" id="email" th:field="*{email}" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="password">Password</label>
-                                    <br>
-                                    <input type="password" class="form-control" id="password" th:field="*{password}">
-                                </div>
-                                <div class="form-group">
-                                    <label for="role">Role</label>
-                                    <br>
-                                    <select class="form-select form-select-sm"  id="role"  size=2 th:field="*{roles}" multiple>
-                                        <option th:each="role : ${roles}"
-                                          th:value="${role.getId()}"
-                                          th:text="${role.toString()}">
-                                        </option>
-                                    </select>
-                                    <br>
-                                </div>
-                    </form>
+                        <form th:method="PATCH" th:action="@{/admin/update/{id}(id=${user.getId()})}" th:object="${user}">
+                                    <div class="form-group">
+                                        <label for="id">ID</label>
+                                        <br>
+                                        <input type="text" class="form-control" id="id" th:field="*{id}" readonly required>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="name">First name</label>
+                                        <br>
+                                        <input type="text" class="form-control" id="name" th:field="*{firstName}" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="surname">Last name</label>
+                                        <br>
+                                        <input type="text" class="form-control" id="surname" th:field="*{lastName}" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="age">Age</label>
+                                        <br>
+                                        <input type="number" class="form-control" id="age" th:field="*{age}" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="email">Email</label>
+                                        <br>
+                                        <input type="email" class="form-control" id="email" th:field="*{email}" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="password">Password</label>
+                                        <br>
+                                        <input type="password" class="form-control" id="password" th:field="*{password}">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="role">Role</label>
+                                        <br>
+                                        <select class="form-select form-select-sm"  id="role"  size=2 th:field="*{roles}" multiple>
+                                            <option th:each="role : ${roles}"
+                                              th:value="${role.getId()}"
+                                              th:text="${role.toString()}">
+                                            </option>
+                                        </select>
+                                        <br>
+                                    </div>
+                        </form>
                 </div>
                 <div class="modal-footer">
                     <form th:method="POST" th:action="@{/logout}">
