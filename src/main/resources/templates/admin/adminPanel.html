@@ -2,61 +2,78 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+          crossorigin="anonymous">
     <title>ALL users</title>
 </head>
 <body>
+<!-- NAVBAR -->
+<nav class="navbar navbar-dark bg-dark">
+    <div class="container-fluid">
+        <span class="navbar-text">
+           <h5 class="text-white bg-dark">
+               <strong th:text="${user.getEmail()}"></strong>
+                    with roles:
+                        <tr th:each="role : ${role}" th:text="${role.toString()}"></tr></h5>
+        </span>
+        <form th:method="GET" th:action="@{/logout}">
+            <button class="btn btn-outline-light border-0 text-secondary w-100"  type="submit">Logout</button>
+        </form>
+    </div>
+</nav>
 
-<div>
-    <h3> <span th:text = "${helloUser}"></span> with roles<span th:each="role: ${role}" th:text="${role.toString()}"> </span> </h3>
-</div>
-<br>
-<h2> Admin panel</h2>
+    <h2> Admin panel</h2>
 
-<table class="table table-striped">
-    <h3> All users</h3>
-    <thead>
-    <tr>
-        <th>ID</th>
-        <th>First Name</th>
-        <th>Last Name</th>
-        <th>Age</th>
-        <th>Email</th>
-        <th>Role</th>
-        <th>Edit</th>
-        <th>Delete</th>
+    <table class="table table-striped">
+        <h3> All users</h3>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Age</th>
+            <th>Email</th>
+            <th>Role</th>
+            <th>Edit</th>
+            <th>Delete</th>
 
-    </tr>
-</thead>
-    <tr th:each="users : ${allUsers}">
-        <td th:text="${users.id}"/>
-        <td th:text="${users.firstName}"/>
-        <td th:text="${users.lastName}"/>
-        <td th:text="${users.age}"/>
-        <td th:text="${users.email}"/>
-        <td th:each= "role :${users.getRoles()}" th:text="${role.toString()}"></td>
+        </tr>
+    </thead>
+        <tr th:each="users : ${allUsers}">
+            <td th:text="${users.id}"/>
+            <td th:text="${users.firstName}"/>
+            <td th:text="${users.lastName}"/>
+            <td th:text="${users.age}"/>
+            <td th:text="${users.email}"/>
+            <td th:each= "role :${users.getRoles()}" th:text="${role.toString()}"></td>
 
-        <td>
-            <form th:method="GET" th:action="@{admin/updateUser/{id}(id=${users.getId()})}">
-                <input type="submit" value="Edit"/>
+            <td>
+                <form th:method="GET" th:action="@{admin/updateUser/{id}(id=${users.getId()})}">
+                    <input type="submit" value="Edit"/>
+                    </form>
+            </td>
+
+
+            <td>
+                <form th:method="GET" th:action="@{/admin/deleteUser/{id}(id=${users.getId()})}">
+                    <input type="submit" value="Delete"/>
                 </form>
-        </td>
+            </td>
+        </tr>
+    </table>
+    <br>
 
+    <form th:method="GET" th:action="@{/admin/addNewUser}">
+        <input type="submit" value="Add User"/>
+    </form>
 
-        <td>
-            <form th:method="GET" th:action="@{/admin/deleteUser/{id}(id=${users.getId()})}">
-                <input type="submit" value="Delete"/>
-            </form>
-        </td>
-    </tr>
-</table>
-<br>
-
-<form th:method="GET" th:action="@{/admin/addNewUser}">
-    <input type="submit" value="Add User"/>
-</form>
-
-    <form th:method="POST" th:action="@{/logout}">
-        <input type="submit" value="Close"/>
-</form></form>
+        <form th:method="POST" th:action="@{/logout}">
+            <input type="submit" value="Close"/>
+    </form></form>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
 </body>
 </html>

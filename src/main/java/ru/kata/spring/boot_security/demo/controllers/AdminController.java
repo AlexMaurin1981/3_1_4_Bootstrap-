@@ -28,6 +28,8 @@ public class AdminController {
     @GetMapping
 
     public String showAllUsers(Model model, Principal principal) {
+        User user = userService.getUserByEmail(principal.getName());
+        model.addAttribute("user", user);
         model.addAttribute("helloUser", principal.getName());
         model.addAttribute("allUsers", userService.getAllUsers());
         model.addAttribute("role",roleService.getRoles());

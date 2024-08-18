@@ -19,8 +19,7 @@
                <strong th:text="${user.getEmail()}"></strong>
                     with roles:
                         <tr th:each="role : ${role}" th:text="${role.toString()}"></tr></h5>
-          </span>
-
+        </span>
         <form th:method="GET" th:action="@{/logout}">
             <button class="btn btn-outline-light border-0 text-secondary w-100"  type="submit">Logout</button>
         </form>
