@@ -29,61 +29,98 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-2 p-0 m-0">
-                <div class="btn-group-vertical w-100 " role="group" aria-label="First group">
-                    <a href="admin" class="btn btn-primary active btn-group-lg " aria-current="page">Admin</a>
-                    <a href="user" class="btn btn-primary btn-group-lg">User</a>
-                </div>
+                    <div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                        <a class="nav-link active" id="v-pills-admin-tab" data-bs-toggle="pill" href="#v-pills-admin" role="tab" aria-controls="v-pills-admin" aria-selected="true">Admin</a>
+                        <a class="nav-link" id="v-pills-user-tab" data-bs-toggle="pill" href="#v-pills-user" role="tab" aria-controls="v-pills-user" aria-selected="false">User</a>
+                    </div>
             </div>
             <div class="col-10">
+<!-- Users Table-->
+                <div class="tab-content" id="v-pills-tabContent">
+                    <div class="tab-pane fade show active" id="v-pills-admin" role="tabpanel" aria-labelledby="v-pills-admin-tab">
+                        <div class="p-3 mb-2 bg-light text-dark">
+                                <h2> Admin panel</h2>
+                            <div class=" text-dark mb-3">
+                                <table class="table table-striped table-hover table-condensed">
+                                    <h3> All users</h3>
+                                    <thead>
+                                        <tr>
+                                        <th scope="col">ID</th>
+                                        <th scope="col">First Name</th>
+                                        <th scope="col">Last Name</th>
+                                        <th scope="col">Age</th>
+                                        <th scope="col">Email</th>
+                                        <th scope="col">Role</th>
+                                        <th scope="col">Edit</th>
+                                        <th scope="col">Delete</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr th:each="users : ${allUsers}">
+                                            <td th:text="${users.id}"/>
+                                            <td th:text="${users.firstName}"/>
+                                            <td th:text="${users.lastName}"/>
+                                            <td th:text="${users.age}"/>
+                                            <td th:text="${users.email}"/>
+                                            <td th:each= "role :${users.getRoles()}" th:text="${role.toString()}"></td>
+                                            <td>
+                                                <form th:method="GET" th:action="@{admin/updateUser/{id}(id=${users.getId()})}">
+                                                    <button type="submit" class="btn btn-info">Edit</button>
+                                                </form>
+                                            </td>
 
-                <h2> Admin panel</h2>
+                                            <td>
+                                                <form th:method="GET" th:action="@{/admin/deleteUser/{id}(id=${users.getId()})}">
+                                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <br>
 
-                <table class="table table-striped">
-                    <h3> All users</h3>
-                    <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                        <th>Age</th>
-                        <th>Email</th>
-                        <th>Role</th>
-                        <th>Edit</th>
-                        <th>Delete</th>
+                                    <form th:method="GET" th:action="@{/admin/addNewUser}">
+                                        <input type="submit" value="Add User"/>
+                                    </form>
+                            </div>
+                        </div>
+                    </div>
+<!-- User Table -->
+                    <div class="tab-pane fade" id="v-pills-user" role="tabpanel" aria-labelledby="v-pills-user-tab">
+                        <div class="p-3 mb-2 bg-light text-dark">
+                            <h2>User information-page</h2>
+                            <div class=" text-dark mb-3">
+                                <div class="header">
+                                    <h3>About user</h3>
+                                </div>
+                                <!-- TABLE STARTS HERE-->
 
-                    </tr>
-                </thead>
-                    <tr th:each="users : ${allUsers}">
-                        <td th:text="${users.id}"/>
-                        <td th:text="${users.firstName}"/>
-                        <td th:text="${users.lastName}"/>
-                        <td th:text="${users.age}"/>
-                        <td th:text="${users.email}"/>
-                        <td th:each= "role :${users.getRoles()}" th:text="${role.toString()}"></td>
-
-                        <td>
-                            <form th:method="GET" th:action="@{admin/updateUser/{id}(id=${users.getId()})}">
-                                <input type="submit" value="Edit"/>
-                                </form>
-                        </td>
-
-
-                        <td>
-                            <form th:method="GET" th:action="@{/admin/deleteUser/{id}(id=${users.getId()})}">
-                                <input type="submit" value="Delete"/>
-                            </form>
-                        </td>
-                    </tr>
-                </table>
-                <br>
-
-                <form th:method="GET" th:action="@{/admin/addNewUser}">
-                    <input type="submit" value="Add User"/>
-                </form>
-
-                    <form th:method="POST" th:action="@{/logout}">
-                        <input type="submit" value="Close"/>
-                </form></form>
+                                <table class="table table-striped table-hover table-condensed">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">ID</th>
+                                        <th scope="col">First Name</th>
+                                        <th scope="col">Last Name</th>
+                                        <th scope="col">Age</th>
+                                        <th scope="col">Email</th>
+                                        <th scope="col">Role</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr th:each="user : ${user}">
+                                        <td th:text="${user.getId()}"/>
+                                        <td th:text="${user.getFirstName()}"/>
+                                        <td th:text="${user.getLastName()}"/>
+                                        <td th:text="${user.getAge()}"/>
+                                        <td th:text="${user.getEmail()}"/>
+                                        <td th:each= "user :${user.getRoles()}" th:text="${user.toString()}"></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
