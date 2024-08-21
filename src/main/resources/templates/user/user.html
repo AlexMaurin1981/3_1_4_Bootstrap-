@@ -34,12 +34,13 @@
             <div class="p-3 mb-2 bg-light text-dark">
                     <h1>User information-page</h1>
                 <div class=" text-dark mb-3">
-                        <div class="header">
-                            <h2>About user</h2>
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>About user</h3>
                         </div>
                             <!-- TABLE STARTS HERE-->
-
-                            <table class="table table-striped table-hover table-condensed">
+                        <div class="card-body">
+                            <table class="table table-striped table-hover">
                                 <thead>
                                     <tr>
                                         <th scope="col">ID</th>
@@ -51,17 +52,18 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr th:each="user : ${user}">
-                                        <td th:text="${user.getId()}"/>
-                                        <td th:text="${user.getFirstName()}"/>
-                                        <td th:text="${user.getLastName()}"/>
-                                        <td th:text="${user.getAge()}"/>
-                                        <td th:text="${user.getEmail()}"/>
+                                    <tr th:each="user : ${user}"/></td>
+                                        <td th:text="${user.getId()}"/></td>
+                                        <td th:text="${user.getFirstName()}"/></td>
+                                        <td th:text="${user.getLastName()}"/></td>
+                                        <td th:text="${user.getAge()}"/></td>
+                                        <td th:text="${user.getEmail()}"/></td>
                                         <td th:each= "user :${user.getRoles()}" th:text="${user.toString()}"></td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
+                    </div>
                 </div>
             </div>
         </div>
