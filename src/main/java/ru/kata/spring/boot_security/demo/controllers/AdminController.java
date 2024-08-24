@@ -32,23 +32,14 @@ public class AdminController {
         model.addAttribute("user", user);
         model.addAttribute("helloUser", principal.getName());
         model.addAttribute("allUsers", userService.getAllUsers());
+        model.addAttribute("newUser", new User());
         model.addAttribute("role",roleService.getRoles());
         return "admin/adminPanel";
     }
 
-    @GetMapping("/addNewUser")
-    public String addNewUser(Model model, Principal principal) {
-        model.addAttribute("helloUser", principal.getName());
-        model.addAttribute("user", new User());
-        model.addAttribute("roles",roleService.getRoles());
-        return "admin/adduser";
-    }
+    @PostMapping()
+    public String saveUser(@ModelAttribute("newUser") User user) {
 
-    @PostMapping("/saveUser")
-    public String saveUser(@ModelAttribute("user") User user, BindingResult bindingResult) {
-if (bindingResult.hasErrors()){
-    return "admin/adduser";
-}
         userService.saveUser(user);
         return "redirect:/admin";
     }
@@ -73,7 +64,7 @@ if (bindingResult.hasErrors()){
         return "admin/updateuser";
     }
 
-        @PatchMapping("/update/{id}")
+        @PostMapping("/update")
         public String save (@ModelAttribute("user") User user) {
             userService.updateUser(user);
             return "redirect:/admin";
