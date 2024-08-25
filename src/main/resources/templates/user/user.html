@@ -55,13 +55,14 @@
                                     </thead>
                                     <tbody>
                                         <tr th:each="user : ${user}"/>
-                                            <td th:text="${user.getId()}"/>
-                                            <td th:text="${user.getFirstName()}"/>
-                                            <td th:text="${user.getLastName()}"/>
-                                            <td th:text="${user.getAge()}"/>
-                                            <td th:text="${user.getEmail()}"/>
-                                            <td th:each= "user :${user.getRoles()}" th:text="${user.toString()}"/>
+                                        <td><p th:text="${user.getId()}"/></td>
+                                        <td><p th:text="${user.getFirstName()}"/></td>
+                                        <td><p th:text="${user.getLastName()}"/></td>
+                                        <td><p th:text="${user.getAge()}"/></td>
+                                        <td><p th:text="${user.getEmail()}"/></td>
+                                        <td><p-0 th:each= "user :${user.getRoles()}" th:text="${user.toString()}"/></td>
                                         </tr>
+
                                     </tbody>
                                 </table>
                             </div>

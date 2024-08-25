@@ -72,12 +72,13 @@
                                                         </thead>
                                                         <tbody>
                                                             <tr th:each="users : ${allUsers}">
-                                                                <td th:text="${users.id}"/>
-                                                                <td th:text="${users.firstName}"/>
-                                                                <td th:text="${users.lastName}"/>
-                                                                <td th:text="${users.age}"/>
-                                                                <td th:text="${users.email}"/>
-                                                                <td th:each= "role :${users.getRoles()}" th:text="${role.toString()}"/>
+                                                                <td><p th:text="${users.getId()}"/></td>
+                                                                <td><p th:text="${users.getFirstName()}"/></td>
+                                                                <td><p th:text="${users.getLastName()}"/></td>
+                                                                <td><p th:text="${users.getAge()}"/></td>
+                                                                <td><p th:text="${users.getEmail()}"/></td>
+                                                                <td><p-0 th:each= "role :${users.getRoles()}" th:text="${role.toString()}"/></td>
+
 
                                                                 <!--- Update Modal-->
 
@@ -154,7 +155,7 @@
 
                                                             <!--- DELETE USER BUTTON --->
                                                                 <td>
-                                                                    <form th:method="GET" th:action="@{/admin/deleteUser/{id}(id=${users.getId()})}">
+                                                                    <form th:method="GET" th:action="@{/admin/deleteUser/{id}(id=${user.getId()})}">
                                                                         <button type="submit" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">Delete</button>
                                                                     </form>
                                                                 </td>
@@ -245,12 +246,13 @@
                                             </thead>
                                             <tbody>
                                             <tr th:each="user : ${user}"/>
-                                                <td th:text="${user.getId()}"/>
-                                                <td th:text="${user.getFirstName()}"/>
-                                                <td th:text="${user.getLastName()}"/>
-                                                <td th:text="${user.getAge()}"/>
-                                                <td th:text="${user.getEmail()}"/>
-                                                <td th:each= "user :${user.getRoles()}" th:text="${user.toString()}"/>
+                                            <td><p th:text="${user.getId()}"/></td>
+                                            <td><p th:text="${user.getFirstName()}"/></td>
+                                            <td><p th:text="${user.getLastName()}"/></td>
+                                            <td><p th:text="${user.getAge()}"/></td>
+                                            <td><p th:text="${user.getEmail()}"/></td>
+                                            <td><p-0 th:each= "user :${user.getRoles()}" th:text="${user.toString()}"/></td>
+                                            </tr>
                                             </tbody>
                                         </table>
                                     </div>
