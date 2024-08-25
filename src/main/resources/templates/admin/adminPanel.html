@@ -97,7 +97,7 @@
                                                                                 </div>
                                                                                 <div class="modal-body fw-bold">
 
-                                                                                    <form th:method="Post" th:action="@{/admin/update}" th:object="${user}" id="editForm">
+                                                                                    <form th:method="Post" th:action="@{/admin}" th:object="${user}" id="editForm">
                                                                                         <input type="hidden" th:field="*{id}">
                                                                                         <div class="form-group">
                                                                                             <label for="id" class="form-label">ID</label>
@@ -134,7 +134,7 @@
                                                                                             <label for="role" class="form-label">Role</label>
                                                                                             <br>
                                                                                             <select class="form-select form-select-sm"  id="role"  size=2 th:field="*{roles}" multiple>
-                                                                                                <option th:each="role : ${roles}"
+                                                                                                <option th:each="role : ${role}"
                                                                                                         th:value="${role.getId()}"
                                                                                                         th:text="${role.toString()}">
                                                                                                 </option>
@@ -152,7 +152,7 @@
                                                                     </div>
                                                                 </td>
 
-
+                                                            <!--- DELETE USER BUTTON --->
                                                                 <td>
                                                                     <form th:method="GET" th:action="@{/admin/deleteUser/{id}(id=${users.getId()})}">
                                                                         <button type="submit" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">Delete</button>
