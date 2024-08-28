@@ -57,12 +57,12 @@ public class AdminController {
         return "redirect:/admin";
     }
 
-    @GetMapping ("/updateUser/{id}")
-    public String  update(@PathVariable ("id") long id,Model model) {
-        model.addAttribute("user", userService.getUserById(id));
-        model.addAttribute("roles", roleService.getRoles());
-        return "admin/updateuser";
-    }
+   // @GetMapping ("/{id}")
+  //  public String  update(@PathVariable ("id") long id,Model model) {
+  //      model.addAttribute("user", userService.getUserById(id));
+  //      model.addAttribute("roles", roleService.getRoles());
+  //      return "admin/adminPanel";
+ //   }
 
         @PostMapping("/update")
         public String save (@ModelAttribute("user") User user) {
