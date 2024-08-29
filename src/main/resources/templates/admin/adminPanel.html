@@ -83,10 +83,10 @@
                                                                 <!--- Update Modal-->
 
                                                                 <td>
-                                                                    <button type="button" data-toggle="modal" class="btn btn-info" th:data-target="'#editModal'+${user.getId()}">
+                                                                    <button type="button" data-bs-toggle="modal" class="btn btn-info" th:attr="data-bs-target=${'#editModal'+user.getId()}">
                                                                             Edit
                                                                     </button>
-                                                                    <div class="modal fade" th:id="'editModal'+${user.getId()}"  tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+                                                                    <div class="modal fade" th:attr="id=${'editModal'+user.getId()}"  tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
                                                                         <div class="modal-dialog modal-dialog-centered modal-sm">
                                                                             <div class="modal-content">
                                                                                 <div class="modal-header bg-light">
