@@ -56,15 +56,14 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public void updateUser(User updateUser) {
-        User user = userRepository.findById(updateUser.getId()).orElseThrow(()-> new IllegalArgumentException("User not found")) ;
-        String correntPassword = user.getPassword();
+        User user = userRepository.findById(updateUser.getId()).orElseThrow(() -> new IllegalArgumentException("User not found"));
+        String currentPassword = user.getPassword();
         String newPassword = updateUser.getPassword();
-        if (!correntPassword.equals(newPassword)) {
-            updateUser.setPassword(bCryptPasswordEncoder.encode(updateUser.getPassword()));
+        if (!currentPassword.equals(newPassword)) {
+            updateUser.setPassword((bCryptPasswordEncoder.encode(updateUser.getPassword())));
         }
         userRepository.save(updateUser);
     }
-
     @Override
     public List<User> getAllUsers() {
         return userRepository.findAll();
