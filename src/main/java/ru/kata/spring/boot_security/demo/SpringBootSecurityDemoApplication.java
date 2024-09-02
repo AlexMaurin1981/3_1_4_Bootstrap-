@@ -2,8 +2,8 @@ package ru.kata.spring.boot_security.demo;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import ru.kata.spring.boot_security.demo.enteties.Role;
-import ru.kata.spring.boot_security.demo.reposotories.RoleRepository;
+import ru.kata.spring.boot_security.demo.entetie.Role;
+import ru.kata.spring.boot_security.demo.reposotorie.RoleRepository;
 
 import java.util.ArrayList;
 import java.util.List;

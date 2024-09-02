@@ -1,4 +1,4 @@
-package ru.kata.spring.boot_security.demo.enteties;
+package ru.kata.spring.boot_security.demo.entetie;
 
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;

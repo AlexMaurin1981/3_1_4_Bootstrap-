@@ -1,8 +1,7 @@
-package ru.kata.spring.boot_security.demo.services;
+package ru.kata.spring.boot_security.demo.service;
 
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.transaction.annotation.Transactional;
-import ru.kata.spring.boot_security.demo.enteties.User;
+import ru.kata.spring.boot_security.demo.entetie.User;
 
 import java.util.List;
 
