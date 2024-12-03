@@ -133,7 +133,7 @@
                                                                                 <div class="form-group">
                                                                                     <label th:for="'role_edit'+${user.getId()}" class="form-label">Role</label>
                                                                                     <br>
-                                                                                    <select class="form-select form-select-sm" name="role" th:id="'role_edit'+${user.getId()}"  size=2 th:field="${user.roles}" multiple>
+                                                                                    <select class="form-select form-select-sm" name="role" th:id="'role_edit'+${user.getId()}"  size=2 th:field="${user.roles}"  th:value="${user.getId()}" multiple>
                                                                                         <option th:each="role : ${role}"
                                                                                                 th:value="${role.getId()}"
                                                                                                 th:text="${role.toString()}">

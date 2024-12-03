@@ -35,6 +35,7 @@ public class UserServiceImpl implements UserService {
         return userRepository.findByEmail(email);
     }
 
+
     @Override
     @Transactional
     public void saveUser(User user) {
@@ -52,6 +53,7 @@ public class UserServiceImpl implements UserService {
     @Transactional
     public User updateUser(User updateUser) {
         User user = userRepository.findById(updateUser.getId()).orElseThrow(()->new IllegalArgumentException("User not found"));
+        updateUser.setRoles(user.getRoles());
         String currentPassword = user.getPassword();
         String newPassword = updateUser.getPassword();
         if (!currentPassword.equals(newPassword)) {
@@ -63,6 +65,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<User> getAllUsers() {
         return userRepository.findAll();
+    }
+
+    @Override
+    public User findById(Long id) {
+        return userRepository.findById(id).orElseThrow( () -> new IllegalArgumentException("User not found"));
     }
 
     @Override

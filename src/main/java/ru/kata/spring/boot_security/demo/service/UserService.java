@@ -16,5 +16,6 @@ public interface UserService  extends UserDetailsService {
     User updateUser(User user);
     List<User> getAllUsers();
 
+    User findById(Long id);
 }
 
